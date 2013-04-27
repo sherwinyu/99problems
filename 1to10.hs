@@ -52,10 +52,17 @@ compress (a:b:as)
   | a == b = compress (a:as)
   | a /= b = a:(compress (b:as))
 
--- 9 . Pack consecutive duplicates of a list into sublists
+-- 9. Pack consecutive duplicates of a list into sublists
 pack :: (Eq a) => [a] -> [[a]]
 pack [] = [[]]
 pack (a:[]) = [[a]]
 pack (a:as)
-  | a == (head (head (pack as))) = (a:(head $ pack as)):(tail $ pack as)
-  | a /= (head (head (pack as))) = [a]:(pack as)
+  | a == (head (head (packed))) = (a:(head $ packed)):(tail $ packed)
+  | a /= (head (head (packed))) = [a]:(pack as)
+  where packed = pack as
+
+
+-- 10. Run length encoding: consecutive duplicates of elements are encoded as lists (N E)
+--     where N is the number of duplicates of element E.
+encode:: (Eq a) => [a] -> [(Integer, a)]
+encode xs = map (\arr -> (toInteger $ length arr, head arr )) (pack xs)
