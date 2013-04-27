@@ -21,3 +21,9 @@ elementAt (a:as) k = elementAt as (k-1)
 myLength :: [a] -> Int
 myLength ([]) = 0
 myLength (a:as) = 1 + myLength as
+
+
+-- 5. Reverse a list
+myReverse :: [x] -> [x]
+myReverse (a:[]) = [a]
+myReverse (a:as) = (myReverse as)++[a]
