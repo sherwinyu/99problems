@@ -27,3 +27,9 @@ myLength (a:as) = 1 + myLength as
 myReverse :: [x] -> [x]
 myReverse (a:[]) = [a]
 myReverse (a:as) = (myReverse as)++[a]
+
+-- 6. Find out whether a list is a palindrome
+isPalindrome :: (Eq x) => [x] -> Bool
+isPalindrome (a:[]) = True
+isPalindrome (a:b:[]) = a == b
+isPalindrome (a:as) = (a == last as) && isPalindrome (init as)
