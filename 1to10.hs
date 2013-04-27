@@ -45,9 +45,17 @@ myFlatten (List []) = []
 compress :: (Eq a) => [a] -> [a]
 compress [] = []
 compress (a:[]) = [a]
-compress (a:b:[]) 
+compress (a:b:[])
   | a == b = [a]
   | a /= b = [a, b]
-compress (a:b:as) 
+compress (a:b:as)
   | a == b = compress (a:as)
   | a /= b = a:(compress (b:as))
+
+-- 9 . Pack consecutive duplicates of a list into sublists
+pack :: (Eq a) => [a] -> [[a]]
+pack [] = [[]]
+pack (a:[]) = [[a]]
+pack (a:as)
+  | a == (head (head (pack as))) = (a:(head $ pack as)):(tail $ pack as)
+  | a /= (head (head (pack as))) = [a]:(pack as)
