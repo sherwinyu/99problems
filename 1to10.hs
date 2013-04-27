@@ -40,3 +40,14 @@ myFlatten :: NestedList a  -> [a]
 myFlatten (Elem x) = [x]
 myFlatten (List (x:xs)) = (myFlatten x) ++ myFlatten (List xs)
 myFlatten (List []) = []
+
+-- 8. Eliminate consecutive duplicates of list elements
+compress :: (Eq a) => [a] -> [a]
+compress [] = []
+compress (a:[]) = [a]
+compress (a:b:[]) 
+  | a == b = [a]
+  | a /= b = [a, b]
+compress (a:b:as) 
+  | a == b = compress (a:as)
+  | a /= b = a:(compress (b:as))
