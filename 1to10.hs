@@ -33,3 +33,10 @@ isPalindrome :: (Eq x) => [x] -> Bool
 isPalindrome (a:[]) = True
 isPalindrome (a:b:[]) = a == b
 isPalindrome (a:as) = (a == last as) && isPalindrome (init as)
+
+-- 7. Flatten a nested list structure
+data NestedList a = Elem a | List [NestedList a]
+myFlatten :: NestedList a  -> [a]
+myFlatten (Elem x) = [x]
+myFlatten (List (x:xs)) = (myFlatten x) ++ myFlatten (List xs)
+myFlatten (List []) = []
