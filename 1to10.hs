@@ -16,3 +16,8 @@ myButLast (a:b:as) = myButLast $ b:as
 elementAt :: (Eq k, Num k) => [a]-> k -> a
 elementAt (a:as) 1 = a
 elementAt (a:as) k = elementAt as (k-1)
+
+-- 4. Find the number of elemnets in a list
+myLength :: [a] -> Int
+myLength ([]) = 0
+myLength (a:as) = 1 + myLength as
