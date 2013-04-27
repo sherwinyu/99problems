@@ -12,5 +12,7 @@ myButLast :: [a] -> a
 myButLast (a:b:[]) = a
 myButLast (a:b:as) = myButLast $ b:as
 
--- 3. Find Kth element of a list
-elementAt :: [a]-> k -> a
+-- 3. Find Kth element of a list (1 indexed)
+elementAt :: (Eq k, Num k) => [a]-> k -> a
+elementAt (a:as) 1 = a
+elementAt (a:as) k = elementAt as (k-1)
